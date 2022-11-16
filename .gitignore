@@ -1,1 +1,5 @@
 .DS_STORE
+
+# Node.js
+package.json
+package-lock.json
