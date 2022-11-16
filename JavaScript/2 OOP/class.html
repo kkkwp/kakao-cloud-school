@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스</title>
+    <script>
+        // Member라는 클래스 생성
+        class Member {
+            // 클래스 안에 메서드를 만들 때에는 function 생략
+            getName() {
+                return this.name;
+            }
+            // 메서드 안에서 this.속성이름을 활용하면 객체의 속성이 생성된다
+            setName(name) {
+                this.name = name;
+            }
+        }
+
+        // 클래스의 인스턴스 만들기
+        let member = new Member();
+        member.setName("아담");
+
+        // 인스턴스를 이용한 메서드 호출
+        console.log(member.getName());
+
+        // Member 클래스에 getJob이라는 속성이 추가됨
+        Member.prototype.getJob = function () { return "직업" };
+        console.log(member.getJob());
+
+        // var f이면 덮어 쓰여지지만, let f이면 에러 발생
+        // let이면 생성 x, 수정 o -> 변수에 많이 사용
+        // const이면 생성 x, 수정 x -> 함수, 클래스에 많이 사용
+        let f = function () {
+            console.log("매개변수가 없는 함수");
+        }
+        f = function (n) {
+            console.log("매개변수가 있는 함수");
+        }
+        
+        f(10);
+        f();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
