@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 객체의 내용</title>
+</head>
+
+<body>
+    <p id="paragraph">문단 태그</p>
+    <button id="btn">버튼</button>
+    <script>
+        document.getElementById("paragraph").addEventListener("click",
+            (e) => {
+                for (attr in e) {
+                    console.log(attr + ":" + e[attr]);
+                }
+            });
+
+        document.getElementById("btn").addEventListener("click", (e) => {
+            // 문단 태그의 클릭이 발생하도록 강제로 이벤트 발생
+            document.getElementById("paragraph").click();
+        })
+    </script>
+
+    <!-- action: 처리할 서버의 URL
+         method: 요청 방식(get, post) -->
+    <form action="loginprocessing" method="post" , id="loginform">
+        <p id="msg"></p>
+        <p>
+            아이디 <input type="text" name="id" id="id" />
+        </p>
+        <p>
+            비밀번호 <input type="password" name="pw" id="pw" />
+        </p>
+        <p>
+            비밀번호 확인 <input type="password" name="ck" id="ck" />
+        </p>
+        <p id="pwmsg"></p>
+        <input type="submit" value="로그인" />
+    </form>
+
+    <h1 id="outer">
+        <span id="inner">인라인 태그</span>
+    </h1>
+    <script>
+        document.getElementById("outer").addEventListener("click", (e) => {
+            alert("Outer 클릭");
+        });
+
+        document.getElementById("inner").addEventListener("click", (e) => {
+            alert("Inner 클릭");
+            // 버블링 막기
+            e.stopPropagation();
+        });
+
+        let id = document.getElementById("id");
+        let pw = document.getElementById("pw");
+        let pw2 = document.getElementById("ck");
+        let msg = document.getElementById("msg")
+
+        document.getElementById("loginform").addEventListener("submit",
+            (e) => {
+                // 아이디 입력란 찾아오기
+                if (id.value.trim().length === 0) {
+                    document.getElementById("msg").innerHTML = "아이디는 필수입니다.";
+                    document.getElementById("msg").style.color = "Red";
+                    // 기본 이벤트를 제거해서 서버에 전송하지 않도록 하기
+                    e.preventDefault();
+                    return;
+                }
+
+                // 비밀번호 필수
+                if (pw.value.trim().length === 0) {
+                    document.getElementById("pwmsg").innerHTML = "비밀번호는 필수입니다.";
+                    document.getElementById("pwmsg").style.color = "Red";
+                    e.preventDefault();
+                    return;
+                }
+
+                // 비밀번호 확인란 비교
+                if (pw.value.trim() != pw2.value.trim()) {
+                    pwmsg.innerHTML = "2개의 비밀번호는 일치해야 함니다.";
+                    pwmsg.style.color = "Red";
+                    e.preventDefault();
+                    return;
+                }
+                // 비밀번호 패턴
+                var pwreg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
+
+                if (pwreg.test(pw.value) === false) {
+                    msg.innerHTML = "비밀번호는 소문자, 대문자, 숫자, 특수문자가 1개씩 포함되어야 하며 8자 이상 15자 이하이여야 합니다.";
+                    pwmsg.style.color = "Red";
+                    e.preventDefault();
+                    return;
+                }
+            });
+            // 비밀번호가 비어있으면 전송이 안되도록 작성
+            // 비밀번호 확인란을 만들어서 비밀번호와 확인란이 맞지 않으면 전송이 안되도록 작성
+            // 비밀번호의 패턴이 맞지 않으면 전송이 되지 않도록 작성
+            // 비밀번호의 패턴을 보고 강한 비밀번호인지 아닌지 판별
+    </script>
+
+</body>
+
+</html>
