@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연산자</title>
+    <script>
+        console.log(-14); // 1의 보수는 부호가 반대가 되고 절댓값 1 차이
+        console.log(27 & 14); // 10
+        console.log(27 | 14); // 31
+        console.log(27 ^ 14); // 21
+        console.log(14 << 2); // 한번 밀 때마다 2배씩 증가
+        console.log(14 >> 2);
+        console.log(14 >>> 2);
+        console.log(-14 >> 2); // 음수의 경우는 >>>와 결과가 다름
+        console.log(-14 >>> 2);
+
+        // 앞의 식의 결과가 false이면 뒤의 식을 확인하지 않음
+        var x = 10;
+        let result = x * 10 && x++;
+        console.log(x);
+
+        // JavaScript는 Boolean이 아니어도 && 연산을 할 수 있음
+        result = true && 10;
+        console.log(result);
+
+        // data falsy라면 data2가 대입되고, truthy라면 data1이 대입된다.
+        let data1 = null;
+        let data2 = [3, 4];
+        result = data1 || data2;
+
+        // 문자열과 다른 데이터를 +하면 다른 데이터를 문자열로 변환해서 결합
+        console.log("결과" + result);
+        console.log("12" * 3);
+
+        // 맨 앞의 내용이 true이면 다음 내용이 남고
+        // 그렇지 않으면 마지막 내용이 남는다.
+        var a1 = 20;
+        var a2 = 30;
+        let max = (a1 > a2) ? a1 : a2;
+        console.log(max);
+
+        // nullish operator
+        // ?? - falsy를 판단하는 것이 아니고 데이터의 존재 여부를 확인
+        var d1 = 0;
+        var d2 = "JavaScript";
+        let res = d1 || d2; // 0은 falsy 값이라서 d2가 남는다.
+        console.log(res);
+        res = d1 ?? d2; // d1이 null이 아니기 때문에 d1이 남는다.
+        console.log(res);
+
+        // 자료형
+        var str = "카리나";
+        console.log(typeof str);
+
+        // 존재 여부 확인
+        var ar = ["카리나", "지젤", "윈터"];
+        console.log("닝닝" in ar);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
