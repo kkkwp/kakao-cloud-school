@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" contents="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 - return</title>
+    <script>
+        // return - 함수의 수행을 종료하고 호출한 곳으로 돌아가는 역할
+        function f1() {
+            for (var i = 1; i < 10; i++) {
+                if (i % 3 == 0) {
+                    // 수행을 종료하고 호출한 곳으로 돌아가기 때문에 break와 유사한 효과
+                    return;
+                }
+                console.log(i);
+            }
+        }
+        f1();
+
+        // return의 또다른 역할은 하나의 데이터를 호출한 곳으로 가지고 갈 수 있음
+        function f2(first, second) {
+            return first + second;
+        }
+
+        // 함수를 호출하고 리턴된 결과를 저장
+        var result = f2(100, 200);
+        console.log(result);
+
+        // 리턴된 결과를 다른 함수의 매개변수로 사용
+        result = f2(f2(1000, 3000), 2000);
+        console.log(result);
+
+        var imsi = f2(1000, 3000);
+        result = f2(imsi, 2000);
+        console.log(result);
+
+        // callback - 함수를 대입 받아서 상태 변화가 생길 때 호출되도록 하는 것
+        // setInterval(함수 , 주기) - 주기마다 함수를 호출해서 실행하는 함수, 주기는 ms 단위
+        setInterval(() => {
+            console.log("콜백을 이용한 타이머 실행");
+        }, 10000);
+
+        // closure - 함수를 호출해서 함수를 리턴 받아 저장
+        // 함수 생성
+        function outer() {
+            let x = 0;
+            // 함수를 만들어서 리턴하는데, 이 함수는 함수 내에 있는 함수이므로 외부에 있는 데이터를 조작하는 것이 가능
+            return () => {
+                x++;
+                console.log(x);
+            }
+        }
+        // 리턴 받은 함수를 호출하면 outer 안에 있는 x 값이 수정됨
+        // 작업한 내역을 함수 안에 저장하면서 작업을 계속하는 것이 가능
+        var result = outer();
+        result();
+        result();
+
+        // ECMA 2015에서 매개변수에 기본값을 설정하는 문법이 추가
+        const f3 = function (n = 1) {
+            // 예전에는 or을 이용해서 기본값 설정
+            //const radius = n || 1;
+            return Math.PI * n * n;
+        }
+        console.log(f3(10));
+        console.log(f3());
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
