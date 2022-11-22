@@ -1,0 +1,24 @@
+-- LIMIT(TOP N)
+
+-- popu가 큰 4개의 데이터 조회
+SELECT *
+FROM tCity
+ORDER BY popu DESC
+LIMIT 4;
+
+-- popu가 큰 5번째 데이터부터 2개 조회
+SELECT *
+FROM tCity
+ORDER BY popu DESC
+LIMIT 4, 2;
+
+SELECT *
+FROM tCity
+ORDER BY popu DESC
+LIMIT 2
+OFFSET 4 ;
+
+-- OFFSET FETCH
+SELECT *
+FROM tCity
+ORDER BY popu DESC OFFSET 4 ROWS FETCH NEXT 2 ROWS ONLY;
