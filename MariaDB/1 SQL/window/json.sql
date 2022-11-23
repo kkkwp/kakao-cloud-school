@@ -1,0 +1,7 @@
+-- JSON 출력
+
+SELECT ENAME, SAL
+FROM EMP;
+
+SELECT JSON_OBJECT('name', ENAME, 'salary', SAL)
+FROM EMP;

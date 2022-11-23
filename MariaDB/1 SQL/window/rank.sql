@@ -1,0 +1,9 @@
+-- 순위
+
+-- RANK - SAL의 오름차순 순위
+SELECT RANK() OVER(ORDER BY SAL ASC), ENAME, SAL
+FROM EMP;
+
+-- NTILE - SAL을 오름차순 정렬한 후 4개의 그룹으로 분할
+SELECT NTILE(4) OVER(ORDER BY SAL ASC), ENAME, SAL
+FROM EMP;
