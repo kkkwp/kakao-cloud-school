@@ -1,0 +1,32 @@
+-- SCALA FUNCTION
+
+-- 수치 함수
+
+-- EMPNO가 홀수인 데이터를 조회
+-- MOD(데이터, 나누는 수)는 나머지를 리턴
+SELECT *
+FROM EMP
+WHERE MOD(EMPNO, 2) = 1;
+
+-- 문자열 함수
+
+-- 1982년에 입사한 사원의 ENAME과 SAL을 조회
+SELECT ENAME, SAL
+FROM EMP
+WHERE HIREDATE >='19820101' AND HIREDATE <= '19821231';
+
+SELECT ENAME, SAL
+FROM EMP
+WHERE HIREDATE BETWEEN '19820101' AND '19821231';
+
+SELECT ENAME, SAL
+FROM EMP
+WHERE SUBSTRING(HIREDATE, 1, 4) = '1982';
+
+-- NULL 관련 함수
+
+-- 데이터베이스에서는 NULL과 연산하면 NULL
+SELECT 10 + NULL;
+
+-- 첫번째 데이터가 NULL이면 두번째 데이터를 리턴
+SELECT 10 + IFNULL(NULL, 20);
