@@ -14,7 +14,7 @@ dotenv.config();
 
 // 서버 설정
 const app = express();
-app.set('port', process.send.PORT || 9000);
+app.set('port', process.env.PORT || 9000);
 
 // 로그를 매일 기록하기 위한 설정
 let FileStreamRotator = require('file-stream-rotator');
@@ -314,6 +314,10 @@ app.post('/item/delete', (req, res) => {
             console.log(err);
             res.json({ "result": false });
         } else {
+            // 현재 날짜 및 시간을 update.txt에 기록
+            const writeStream = fs.createWriteStream('./update.txt');
+            writeStream.write(getTime());
+            writeStream.end();
             res.json({ "result": true });
         }
     });
@@ -322,8 +326,49 @@ app.post('/item/delete', (req, res) => {
 // 수정을 get으로 요청했을 때 - 수정 화면으로 이동
 app.get('/item/update', (req, res) => {
     // public 디렉토리의 update.html을 읽어내서 리턴
-    fs.readFile('./pulic/update.html', (err, data) => {
+    fs.readFile('./public/update.html', (err, data) => {
         res.send(data);
+    });
+});
+
+app.post('/item/update', upload.single('pictureurl'), (req, res) => {
+    // 파라미터 가져오기
+    const itemid = req.body.itemid;
+    const itemname = req.body.itemname;
+    const price = req.body.price;
+    const description = req.body.description;
+    // 예전 파일 이름
+    const oldpictureurl = req.body.oldpictureurl;
+
+    // 수정할 파일 이름 만들기
+    let pictureurl;
+    if (req.file) {
+        pictureurl = req.file.filename;
+    } else {
+        pictureurl = oldpictureurl;
+    }
+
+    // 데이터베이스 작업
+    connection.query('update goods set itemname=?, price=?, description=?, pictureurl=?, updatedate=? where itemid=?',
+        [itemname, price, description, pictureurl, getDate(), itemid], (error, results, fields) => {
+            if (error) {
+                // 에러가 발생한 경우
+                console.log(error);
+                res.json({ 'result': false });
+            } else {
+                // 성공했을 때 처리
+                const writeStream = fs.createWriteStream("./update.txt");
+                writeStream.write(getTime());
+                writeStream.end();
+                res.json({ 'result': true });
+            }
+        })
+});
+
+// 서버의 데이터가 마지막으로 업데이트 된 시간을 전송
+app.get('/item/updatedate', (req, res) => {
+    fs.readFile('./update.txt', (error, data) => {
+        res.json({ 'result': data.toString() });
     });
 });
 
