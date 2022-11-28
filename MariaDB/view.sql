@@ -1,0 +1,47 @@
+-- VIEW
+
+-- INLINE VIEW
+SELECT *
+FROM (SELECT * 
+	FROM tStaff 
+	WHERE grade = '과장' OR GRADE = '부장') IMSI
+WHERE IMSI.score >= 70;
+
+-- DEPT 테이블에서 DEPTNO가 30인 데이터를 자주 사용
+SELECT * FROM DEPT WHERE DEPTNO = 30
+
+-- 이제부터 DEPTVIEW가 SELECT * FROM DEPT WHERE DEPTNO = 30 역할을 수행
+-- 한번 컴파일 되면 메모리에 상주하기 때문에 빠름
+CREATE VIEW DEPTVIEW
+AS
+SELECT * 
+FROM DEPT 
+WHERE DEPTNO = 30;
+
+-- DEPT 테이블의 모든 내용을 가지고 DEPTCOPY 생성
+CREATE TABLE DEPTCOPY
+AS 
+SELECT *
+FROM DEPT;
+
+-- DEPTCOPY 테이블에서 DEPTNO가 20이 넘는 데이터를 가지고 dEPTNIEW라는 VIEW를 생성
+CREATE OR REPLACE VIEW DEPTVIEW
+AS
+SELECT*
+FROM DEPTCOPY
+WHERE DEPTNO > 20;
+
+-- VIEW는 테이블처럼 사용 가능
+-- VIEW는 SQL을 가지고 있는 것이지 실제 데이터를 가지고 있는 것이 아님/
+SELECT * 
+FROM DEPTVIEW;
+
+-- VIEW에 데이터 삽입 - 원본 테이블에 삽입
+INSERT INTO DEPTVIEW(DEPTNO, DNAME, LOC) 
+VALUES (50, '영업', '분당');
+
+-- 원본 테이블을 확인
+SELECT * FROM DEPTCOPY;
+
+-- 뷰 삭제
+DROP VIEW DEPTVIEW;
