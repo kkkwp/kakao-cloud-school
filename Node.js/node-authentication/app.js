@@ -99,12 +99,14 @@ app.use(passport.session());
 
 // 라우터 설정
 const pageRouter = require('./routes/page');
-
 // 여기 설정한 URL과 page.js에 설정된 URL의 조합으로 URL을 결정
 app.use('/', pageRouter);
 
 const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
+
+const postRouter = require('./routes/post');
+app.use('/post', postRouter);
 
 // 404 에러가 발생한 경우 처리
 app.use((req, res, next) => {
