@@ -67,4 +67,14 @@ router.get('/logout', isLoggedIn, (req, res, next) => {
     });
 });
 
+// 카카오 로그인을 눌렀을 때 처리
+router.get('/kakao', passport.authenticate('kakao'));
+
+// 카카오 로그인 실패했을 때와 성공했을 때 처리
+router.get('/kakao/callback', passport.authenticate('kakao', {
+    failureRedirect: '/',
+}), (req, res) => {
+    res.redirect('/');
+})
+
 module.exports = router;

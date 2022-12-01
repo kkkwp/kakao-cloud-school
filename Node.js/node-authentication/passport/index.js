@@ -1,6 +1,8 @@
 const passport = require('passport');
 // 로컬 로그인 구현
 const local = require('./localStrategy'); // 현재 디렉토리의 localStrategy 파일을 가져오기
+// 카카오 로그인
+const kakao = require('./kakaoStrategy');
 // 유저 정보 관련 model
 const User = require('../models/user'); // 상위 디렉토리 model 디렉토리의 user 가져오기
 
@@ -17,4 +19,5 @@ module.exports = () => {
             .catch(err => done(err));
     });
     local();
+    kakao();
 };
