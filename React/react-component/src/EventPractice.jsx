@@ -5,23 +5,19 @@ class EventPractice extends Component {
         name: ''
     }
 
-    handleChange(e) {
+    //babel 이 인스턴스의 메서드로 변환을 자동으로 수행
+    //this.handleChange로 이 메서드를 사용하는 것이 가능
+    handleChange = (e) => {
         this.setState({
             name: e.target.value
         })
     }
 
-    handleClick(e) {
+    handleClick = (e) => {
         alert(this.state.name);
         this.setState({
             name: ''
         })
-    }
-
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
     }
 
     render() {
