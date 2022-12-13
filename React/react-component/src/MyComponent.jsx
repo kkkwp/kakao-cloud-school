@@ -1,9 +1,9 @@
 import React from "react";
 
-const MyComponent = (props) => {
+const MyComponent = ({ children, name }) => {
     return (<>
-        <div>나의 컴포넌트의 이름은 {props.name} 입니다.</div>
-        <p>{props.children}</p>
+        <div>나의 컴포넌트의 이름은 {name} 입니다.</div>
+        <p>{children}</p>
     </>)
 };
 
