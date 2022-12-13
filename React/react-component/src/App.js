@@ -2,7 +2,7 @@ import MyComponent from "./MyComponent";
 
 function App() {
   return (
-    <MyComponent />
+    <MyComponent>태그 안의 내용</MyComponent>
   );
 }
 
