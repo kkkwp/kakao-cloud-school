@@ -4,7 +4,7 @@ import './ValidationSample.css';
 
 class ValidationSample extends Component {
     // Ref(다른 DOM 객체를 참조할 수 있는 속성) 생성
-    input = React.createRef();
+    //input = React.createRef();
 
     // state - 클래스 안의 멤버 변수나 함수 안의 지역 변수와 유사
     // state는 변경 되면 화면에 바로 적용 된다.
@@ -21,7 +21,9 @@ class ValidationSample extends Component {
             validated: this.state.password === '0000'
         })
         // input이 참조하는 객체에 focus를 설정
-        this.input.current.focus();
+        // createRef 함수로 만든 경우
+        //this.input.current.focus();
+        this.input.focus();
     }
 
     // input의 입력 값을 변경했을 때 처리
@@ -38,7 +40,7 @@ class ValidationSample extends Component {
             <div>
                 <input
                     type='password'
-                    ref={this.input}
+                    ref={ref => { this.input = ref }}
                     value={this.state.password}
                     name='password'
                     onChange={this.handleChange}
