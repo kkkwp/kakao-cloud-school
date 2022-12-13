@@ -15,11 +15,10 @@ class StateComponent extends Component {
         return (<>
             <p>숫자:{this.state.number}</p>
             <button onClick={(e) => {
-                this.setState(
-                    prevState => {
-                        return { number: prevState.number + 1 }
-                    }
-                )
+                this.setState({ number: this.state.number + 1 }, () => {
+                    console.log('state의 값이 변경됨');
+                    console.log(this.state);
+                })
             }}>증가</button>
         </>)
     }
