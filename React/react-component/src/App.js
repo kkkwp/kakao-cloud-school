@@ -2,6 +2,7 @@ import MyComponent from "./MyComponent";
 import StateComponent from "./StateComponent";
 import EventPractice from "./EventPractice";
 import ValidationSample from "./ValidationSample";
+import ScrollBox from "./ScrollBox";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <StateComponent />
       <EventPractice />
       <ValidationSample />
+      <ScrollBox />
     </>
   );
 }
