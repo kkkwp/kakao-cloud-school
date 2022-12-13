@@ -1,9 +1,12 @@
 import Iteration from "./Iteration";
+import ErrorBoundary from "./ErrorBoundary";
 
 function App() {
   return (
     <div>
-      <Iteration />
+      <ErrorBoundary>
+        <Iteration />
+      </ErrorBoundary>
     </div>
   );
 }
