@@ -57,6 +57,13 @@ const App = () => {
   const onRemove = (id) =>
     setUsers(users.filter(user => user.id !== id));
 
+  // 데이터 수정 함수
+  // id에 해당하는 데이터의 active 속성의 값을 반전
+  const onToggle = (id) =>
+    setUsers(users.map(user => user.id === id
+      ? { ...user, active: !user.active }
+      : user));
+
   return (
     <div>
       <CreateUser
@@ -66,7 +73,8 @@ const App = () => {
         onCreate={onCreate} />
       <UserList
         users={users}
-        onRemove={onRemove} />
+        onRemove={onRemove}
+        onToggle={onToggle} />
     </div>
   )
 }
