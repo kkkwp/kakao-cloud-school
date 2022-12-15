@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import InputSample from './InputSample';
 
 // 클래스 컴포넌트
 class ClassState extends Component {
@@ -44,6 +45,7 @@ function App() {
     <div>
       <ClassState />
       <FunctionState />
+      <InputSample />
     </div>
   );
 }
