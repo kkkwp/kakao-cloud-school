@@ -1,9 +1,14 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 
 import UserList from './UserList';
 import CreateUser from './CreateUser';
 
+// active가 true인 데이터의 개수
+const countActiveUser = (users) => {
+  console.log("사용자 수를 세기");
+  return users.filter(user => user.active).length;
+}
 
 const App = () => {
   const [inputs, setInputs] = useState({
@@ -22,12 +27,13 @@ const App = () => {
 
   // 배열의 데이터를 수정하면 컴포넌트가 리랜더링 될 수 있도록 state로 생성
   const [users, setUsers] = useState([
-    { id: 1, username: 'karina', email: 'karina@gmail.com' },
-    { id: 2, username: 'winter', email: 'winter@naver.com' }
+    { id: 1, username: 'karina', email: 'karina@gmail.com', active: false },
+    { id: 2, username: 'winter', email: 'winter@naver.com', active: true },
+    { id: 3, username: 'ningning', email: 'ningning@sm.com', active: true },
   ]);
 
   // 변수 생성
-  const nextId = useRef(3);
+  const nextId = useRef(4);
 
   // 데이터 삽입 함수
   const onCreate = () => {
@@ -64,6 +70,10 @@ const App = () => {
       ? { ...user, active: !user.active }
       : user));
 
+  // 활성화된 user 개수를 세는 함수 호출
+  // users에 변화가 생긴 경우만 함수를 호출하고 그 이외의 경우는 결과를 복사하도록 수정
+  const count = useMemo(() => countActiveUser(users), [users]);
+
   return (
     <div>
       <CreateUser
@@ -75,6 +85,7 @@ const App = () => {
         users={users}
         onRemove={onRemove}
         onToggle={onToggle} />
+      <div>활성화된 유저 수: {count}</div>
     </div>
   )
 }
