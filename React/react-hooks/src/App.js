@@ -29,7 +29,7 @@ const App = () => {
   // 변수 생성
   const nextId = useRef(3);
 
-  // 데이터 삽입
+  // 데이터 삽입 함수
   const onCreate = () => {
     // 하나의 객체 생성
     const user = {
@@ -50,6 +50,13 @@ const App = () => {
     nextId.current += 1;
   }
 
+  // 데이터 삭제 함수
+  // users state에서 id가 id인 데이터 삭제
+  // id가 일치하지 않는 데이터만 삭제
+  // 실제로는 id가 일치하지 않는 데이터만 가지고 배열을 만들어서 수정한다.
+  const onRemove = (id) =>
+    setUsers(users.filter(user => user.id !== id));
+
   return (
     <div>
       <CreateUser
@@ -57,7 +64,9 @@ const App = () => {
         email={email}
         onChange={onChange}
         onCreate={onCreate} />
-      <UserList users={users} />
+      <UserList
+        users={users}
+        onRemove={onRemove} />
     </div>
   )
 }
