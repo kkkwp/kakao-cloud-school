@@ -1,14 +1,11 @@
-import './App.css';
+import React from "react";
+
+import StyledComponent from "./components/StyledComponent";
 
 function App() {
     return (
         <div>
-            <nav>
-                <div className='nav-wrapper'>
-                    <div>React</div>
-                </div>
-            </nav>
-            <div>Material Design</div>
+            <StyledComponent>버튼</StyledComponent>
         </div>
     );
 }
