@@ -1,8 +1,15 @@
-import Button from "./components/Button";
+import './App.css';
 
 function App() {
     return (
-        <Button>버튼</Button>
+        <div>
+            <nav>
+                <div className='nav-wrapper'>
+                    <div>React</div>
+                </div>
+            </nav>
+            <div>Material Design</div>
+        </div>
     );
 }
 
