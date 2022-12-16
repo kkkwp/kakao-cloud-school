@@ -7,7 +7,7 @@ import ScrollBox from "./ScrollBox";
 function App() {
   return (
     <>
-      <MyComponent name={3}>태그 안의 내용</MyComponent>
+      <MyComponent name={'star'} year={2022}>태그 안의 내용</MyComponent>
       <StateComponent />
       <EventPractice />
       <ValidationSample />
