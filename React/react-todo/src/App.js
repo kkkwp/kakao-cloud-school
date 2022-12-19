@@ -1,8 +1,10 @@
+import ToDoTemplate from "./components/ToDoTemplate";
+
 function App() {
   return (
-    <div>
+    <ToDoTemplate>
       To Do Application
-    </div>
+    </ToDoTemplate>
   );
 }
 
