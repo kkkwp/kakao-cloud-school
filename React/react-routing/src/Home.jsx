@@ -9,6 +9,7 @@ const Home = () => {
                 <li><Link to='/profile/karina'>카리나</Link></li>
                 <li><Link to='/profile/winter'>윈터</Link></li>
                 <li><Link to='/profile/void'>모르는 유저</Link></li>
+                <li><Link to='/articles'>게시물</Link></li>
             </ul>
         </div>
     )
