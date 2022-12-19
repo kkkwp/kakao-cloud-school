@@ -10,9 +10,19 @@ import cn from 'classnames';
 
 import './ToDoListItem.scss'
 
-const ToDoListItem = ({ todo }) => {
+import { useCallback } from 'react';
+
+const ToDoListItem = ({ todo, onRemove }) => {
     // 넘어온 데이터 중에서 text와 checked만 분해
     const { id, text, checked } = todo;
+
+    // 데이터 삭제 함수
+    const onDelete = useCallback((e) => {
+        const result = window.confirm(text + "를 정말 삭제하시겠어요? o(TヘTo)");
+        if (result) {
+            onRemove(id);
+        }
+    }, [onRemove, id, text]);
 
     return (
         <div className="ToDoListItem">
@@ -20,7 +30,7 @@ const ToDoListItem = ({ todo }) => {
                 {checked ? <MdOutlineFavorite /> : <MdOutlineFavoriteBorder />}
                 <div className="text">{text}</div>
             </div>
-            <div className="remove">
+            <div className="remove" onClick={onDelete}>
                 <MdClear />
             </div>
         </div>

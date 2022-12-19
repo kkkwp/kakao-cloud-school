@@ -45,10 +45,18 @@ function App() {
     nextId.current += 1;
   }, [todos]);
 
+  //데이터 삭제를 위한 함수
+  const onRemove = useCallback((id) => {
+    setToDos(todos.filter(todo => todo.id !== id));
+  }, [todos])
+
   return (
     <ToDoTemplate>
-      <ToDoInsert onInsert={onInsert} />
-      <ToDoList todos={todos} />
+      <ToDoInsert
+        onInsert={onInsert} />
+      <ToDoList
+        todos={todos}
+        onRemove={onRemove} />
     </ToDoTemplate>
   );
 }
