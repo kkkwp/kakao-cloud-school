@@ -2,7 +2,7 @@ import React from "react";
 import ToDoListItem from "./ToDoListItem";
 import "./ToDoList.scss";
 
-const ToDoList = ({ todos, onRemove }) => {
+const ToDoList = ({ todos, onRemove, onToggle }) => {
     return (
         <div className="ToDoList">
             {
@@ -10,7 +10,8 @@ const ToDoList = ({ todos, onRemove }) => {
                     <ToDoListItem
                         todo={todo}
                         key={todo.id}
-                        onRemove={onRemove} />
+                        onRemove={onRemove}
+                        onToggle={onToggle} />
                 ))
             }
         </div>

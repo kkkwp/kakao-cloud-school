@@ -50,13 +50,22 @@ function App() {
     setToDos(todos.filter(todo => todo.id !== id));
   }, [todos])
 
+  // 데이터 수정을 위한 함수
+  const onToggle = useCallback((id) => {
+    // todos를 복제해서 하나씩 순회하면서 
+    // todo의 id 값과 매개변수로 받은 id가 일치하면 checked를 반전하고, 그렇지 않으면 그대로
+    setToDos(todos.map(todo => todo.id === id
+      ? { ...todo, checked: !todo.checked } : todo))
+  }, [todos])
+
   return (
     <ToDoTemplate>
       <ToDoInsert
         onInsert={onInsert} />
       <ToDoList
         todos={todos}
-        onRemove={onRemove} />
+        onRemove={onRemove}
+        onToggle={onToggle} />
     </ToDoTemplate>
   );
 }

@@ -12,7 +12,7 @@ import './ToDoListItem.scss'
 
 import { useCallback } from 'react';
 
-const ToDoListItem = ({ todo, onRemove }) => {
+const ToDoListItem = ({ todo, onRemove, onToggle }) => {
     // 넘어온 데이터 중에서 text와 checked만 분해
     const { id, text, checked } = todo;
 
@@ -26,14 +26,15 @@ const ToDoListItem = ({ todo, onRemove }) => {
 
     return (
         <div className="ToDoListItem">
-            <div className={cn("checkbox", { checked })}>
+            <div className={cn("checkbox", { checked })}
+                onClick={(e) => onToggle(id)}>
                 {checked ? <MdOutlineFavorite /> : <MdOutlineFavoriteBorder />}
                 <div className="text">{text}</div>
             </div>
             <div className="remove" onClick={onDelete}>
                 <MdClear />
             </div>
-        </div>
+        </div >
     )
 }
 
