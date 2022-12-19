@@ -7,11 +7,17 @@ import Article from './Article';
 import Articles from './Articles';
 import Layout from './Layout';
 
+import Login from './Login';
+import MyPage from './MyPage';
+
 function App() {
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/mypage" element={<MyPage />} />
+
       <Route element={<Layout />}>
-        <Route path='/' element={<Home />} />
+        <Route index element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/profile/:username' element={<Profile />} />
       </Route>
