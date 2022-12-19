@@ -1,9 +1,10 @@
 import ToDoTemplate from "./components/ToDoTemplate";
+import ToDoInsert from "./components/ToDoInsert";
 
 function App() {
   return (
     <ToDoTemplate>
-      To Do Application
+      <ToDoInsert />
     </ToDoTemplate>
   );
 }
