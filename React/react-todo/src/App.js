@@ -35,22 +35,23 @@ function App() {
       text,
       checked: false
     }
-    setToDos(todos.concat(todo));
+    // 함수형 업데이트
+    setToDos(todos => todos.concat(todo));
     nextId.current += 1;
-  }, [todos]);
+  }, []);
 
   //데이터 삭제를 위한 함수
   const onRemove = useCallback((id) => {
-    setToDos(todos.filter(todo => todo.id !== id));
-  }, [todos])
+    setToDos(todos => todos.filter(todo => todo.id !== id));
+  }, [])
 
   // 데이터 수정을 위한 함수
   const onToggle = useCallback((id) => {
     // todos를 복제해서 하나씩 순회하면서 
     // todo의 id 값과 매개변수로 받은 id가 일치하면 checked를 반전하고, 그렇지 않으면 그대로
-    setToDos(todos.map(todo => todo.id === id
-      ? { ...todo, checked: !todo.checked } : todo))
-  }, [todos])
+    setToDos(todos => todos.map(todo =>
+      todo.id === id ? { ...todo, checked: !todo.checked } : todo))
+  }, []);
 
   return (
     <ToDoTemplate>
