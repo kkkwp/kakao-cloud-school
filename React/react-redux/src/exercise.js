@@ -1,0 +1,1 @@
+console.log('redux 사용 준비');
