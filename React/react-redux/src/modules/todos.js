@@ -12,7 +12,7 @@ export const changeInput = input => ({
 let id = 3;
 export const insert = text => ({
     type: INSERT,
-    tod: {
+    todo: {
         id: id++,
         text,
         done: false
@@ -51,15 +51,12 @@ const todos = (state = initialState, action) => {
         case TOGGLE:
             return {
                 ...state,
-                todos: todos.map(todo => todo.id === action.id
+                todos: state.todos.map(todo => todo.id === action.id
                     ? { ...todo, done: !todo.done }
                     : todo)
             };
         case REMOVE:
-            return {
-                ...state,
-                todos: state.todos.filter(todo => todo.id !== action.id)
-            }
+            return { ...state, todos: state.todos.filter(todo => todo.id !== action.id) }
         default:
             return state;
     }
