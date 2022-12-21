@@ -1,33 +1,68 @@
-const ADD_TODO = 'todos/ADD_TODO';
-const TOGGLE_TODO = 'todos/TOGGLE_TODO';
+const CHANGE_INPUT = 'todos/CHANGE_INPUT';
+const INSERT = 'todos/INSERT';
+const TOGGLE = 'todos/TOGGLE';
+const REMOVE = 'todos/REMOVE';
 
-// 액션 생성 함수
-let nextId = 1;
+export const changeInput = input => ({
+    type: CHANGE_INPUT,
+    input
+});
 
-export const addToDo = text => ({
-    type: ADD_TODO,
-    todo: {
-        id: nextId++,
-        text
+// 샘플 데이터를 2개 삽입할 거라서 3
+let id = 3;
+export const insert = text => ({
+    type: INSERT,
+    tod: {
+        id: id++,
+        text,
+        done: false
     }
 })
 
-export const toggleToDo = id => ({
-    type: TOGGLE_TODO,
+export const toggle = id => ({
+    type: TOGGLE,
     id
-});
+})
 
-const initialState = [];
+export const remove = id => ({
+    type: REMOVE,
+    id
+})
 
-export default function todos(state = initialState, action) {
+const initialState = {
+    input: '',
+    todos: [{
+        id: 1,
+        text: 'Node',
+        done: true
+    }, {
+        id: 2,
+        text: 'React',
+        done: false
+    }]
+}
+
+const todos = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_TODO:
-            return state.concat(action.todo);
-        case TOGGLE_TODO:
-            return state.map(todo => todo.id === action.id ?
-                { ...todo, done: !todo.done } :
-                todo);
+        case CHANGE_INPUT:
+            return { ...state, input: action.input }
+        case INSERT:
+            return { ...state, todos: state.todos.concat(action.todo) };
+        case TOGGLE:
+            return {
+                ...state,
+                todos: todos.map(todo => todo.id === action.id
+                    ? { ...todo, done: !todo.done }
+                    : todo)
+            };
+        case REMOVE:
+            return {
+                ...state,
+                todos: state.todos.filter(todo => todo.id !== action.id)
+            }
         default:
             return state;
     }
 }
+
+export default todos;
