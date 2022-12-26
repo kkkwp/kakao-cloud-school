@@ -15,8 +15,8 @@ public class Lists {
             al.add(i);
             li.add(i);
         }
-
-        search((ArrayList<Integer>) al, (LinkedList<Integer>) li);
+        //search((ArrayList<Integer>) al, (LinkedList<Integer>) li);
+        insert((ArrayList<Integer>) al, (LinkedList<Integer>) li);
     }
 
     // 조회
@@ -37,5 +37,25 @@ public class Lists {
         }
         end = System.currentTimeMillis();
         System.out.println("LinkedList 조회 시간: " + (end - start)); // 3612
+    }
+
+    // 삽입
+    public static void insert(ArrayList<Integer> al, LinkedList<Integer> li) {
+        long start;
+        long end;
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            al.add(1, 2);
+        }
+        end = System.currentTimeMillis();
+        System.out.println("ArrayList 중간 삽입 시간: " + (end - start)); // 360
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            li.add(1, 2);
+        }
+        end = System.currentTimeMillis();
+        System.out.println("LinkedList 중간 삽입 시간: " + (end - start)); // 3
     }
 }
