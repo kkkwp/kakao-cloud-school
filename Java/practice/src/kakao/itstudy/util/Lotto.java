@@ -2,14 +2,56 @@ package kakao.itstudy.util;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 // 로또 번호 생성기처럼 1-45까지의 숫자 6개를 입력 받아서 저장한 후 출력
 // 입력을 받을 때 1-45 사이의 숫자가 아니거나 중복되는 숫자를 입력하면 다시 입력하도록 한다.
 // 데이터를 출력할 때는 정렬을 해서 출력
+
 public class Lotto {
 
     public static void main(String[] args) {
-        array();
+        //array();
+        treeset();
+    }
+
+    // 중복 검사가 수월하고 정렬을 수행하면서 삽입하는 TreeSet을 이용
+    public static void treeset() {
+        // 입력받기 위한 인스턴스 생성
+        Scanner sc = new Scanner(System.in);
+
+        // 중복된 데이터를 저장하지 않고 데이터를 정렬해서 저장하는 자료구조 클래스
+        Set<Integer> set = new TreeSet<>();
+
+        while (set.size() < 6) {
+            try {
+                System.out.print("로또 번호 입력: ");
+                int temp = sc.nextInt();
+                if (temp < 1 || temp > 45) {
+                    System.out.println("1-45 사이의 숫자만 입력하세요!");
+                    continue;
+                }
+                // 중복 검사
+                boolean result = set.add(temp);
+                // 삽입에 실패하면 - 중복된 데이터라면
+                if (!result) {
+                    System.out.println("중복된 숫자입니다!");
+                }
+            } catch (Exception e) {
+                sc.nextLine();
+                System.out.println("숫자를 넣으세요!");
+            }
+        }
+
+        System.out.println(set);
+
+        // 배열로 사용 - error
+        //Integer[] lotto = (Integer[])set.toArray();
+        //System.out.println(Arrays.toString(lotto));
+
+        // 스캐너 정리
+        sc.close();
     }
 
     // 배열 이용
