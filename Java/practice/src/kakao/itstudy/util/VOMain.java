@@ -30,7 +30,8 @@ public class VOMain {
         data[3] = new VO(4, "박수영", 26);
         data[4] = new VO(5, "유지민", 22);
         System.out.println(Arrays.toString(data)); // [VO{num=1, name='배수지', age=28}, VO{num=2, name='이지은', age=29}, VO{num=3, name='배주현', age=31}, VO{num=4, name='박수영', age=26}, VO{num=5, name='유지민', age=22}]
-        //Arrays.sort(data); // error - ClassCastException
 
+        Arrays.sort(data);
+        System.out.println(Arrays.toString(data)); // [VO{num=4, name='박수영', age=26}, VO{num=1, name='배수지', age=28}, VO{num=3, name='배주현', age=31}, VO{num=5, name='유지민', age=22}, VO{num=2, name='이지은', age=29}]
     }
 }
