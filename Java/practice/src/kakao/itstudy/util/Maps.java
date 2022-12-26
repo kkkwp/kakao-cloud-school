@@ -4,33 +4,62 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+// 데이터 클래스 - VO
+class VO1 {
+    private int number;
+    private String name;
+
+    public VO1() {
+        super();
+    }
+
+    public VO1(int number, String name) {
+        super();
+        this.number = number;
+        this.name = name;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+    public void setNumber(int number) {
+        this.number = number;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    @Override
+    public String toString() {
+        return "VO1 [number=" + number + ", name=" + name + "]";
+    }
+}
+
 public class Maps {
 
     public static void main(String[] args) {
-        // Map의 활용
-        // 데이터의 종류가 한 가지라면 Object 대신에 그 자료형을 기재해도 된다.
-        Map<String, Object> map = new HashMap<>();
+        //데이터 생성 - 모델
+        VO1 vo = new VO1(1, "main");
 
-        // 데이터 추가
-        map.put("name", "민지");
+        // 데이터 출력 - View
+        System.out.println("번호:" + vo.getNumber()); // 번호:1
+        System.out.println("이름:" + vo.getName()); // 이름:main
+        // 모델의 근원이 되는 VO 클래스 안에 속성 이름을 변경하면 View도 수정이 되어야 함
+        // 관계형 데이터베이스는 VO 클래스를 활용
+        //System.out.println("번호:" + vo.getNum());
 
-        // 데이터 가져오기
-        System.out.println(map.get("name")); // 민지
+        // VO 클래스의 인스턴스 역할을 수행하는 Map을 생성
+		Map <String, Object> map = new HashMap<>();
+		// 데이터 저장
+		map.put("번호", 1);
+		map.put("이름", "main");
 
-        // 중복된 키를 이용한 데이터 삽입 = 수정
-        map.put("name", "해린");
-        System.out.println(map.get("name")); // 해린
-
-        // 없는 키를 이용해서 가져왔을 때 - 자바는 null
-        System.out.println(map.get("num")); // null
-
-        // value를 Object로 설정했을 때 사용
-        // value를 삽입할 때 String이지만 Map을 만들 때 value type을 Object로 설정했기 때문에
-        // get을 해서 데이터를 원상복구하고자 하면 강제 형 변환을 해야 한다.
-        String value = (String) map.get("name");
-
-        // 모든 키를 가져오는 것
-        Set<String> keys = map.keySet();
-        System.out.println(keys); // [name]
+		// map의 모든 키를 가져와서 출력
+		Set <String> keys = map.keySet();
+		for(String key : keys) {
+			System.out.println(key + ":" + map.get(key)); // 번호:1 이름:main
+		}
     }
 }
