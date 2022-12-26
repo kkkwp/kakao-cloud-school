@@ -1,6 +1,7 @@
 package kakao.itstudy.util;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class VOMain {
 
@@ -33,5 +34,22 @@ public class VOMain {
 
         Arrays.sort(data);
         System.out.println(Arrays.toString(data)); // [VO{num=4, name='박수영', age=26}, VO{num=1, name='배수지', age=28}, VO{num=3, name='배주현', age=31}, VO{num=5, name='유지민', age=22}, VO{num=2, name='이지은', age=29}]
+
+        // 동적 정렬
+        String [] names = {"카리나", "윈터", "지젤", "닝닝"};
+        System.out.println(Arrays.toString(names)); // [카리나, 윈터, 지젤, 닝닝]
+
+        // 복사본 만들기
+        String [] copy = Arrays.copyOf(names, names.length);
+        Arrays.sort(copy);
+        System.out.println(Arrays.toString(copy)); // [닝닝, 윈터, 지젤, 카리나]
+
+        Arrays.sort(copy, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        System.out.println(Arrays.toString(copy)); // [카리나, 지젤, 윈터, 닝닝]
     }
 }
