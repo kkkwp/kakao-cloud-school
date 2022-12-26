@@ -1,6 +1,7 @@
 package kakao.itstudy.util;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +18,27 @@ public class Lists {
         }
         //search((ArrayList<Integer>) al, (LinkedList<Integer>) li);
         insert((ArrayList<Integer>) al, (LinkedList<Integer>) li);
+
+        List <String> list = new ArrayList<>();
+        list.add("김민지");
+        list.add("팜하니");
+        list.add("다니엘");
+        list.add("강해린");
+        list.add("이혜인");
+
+        // 순회
+        for (String temp : list) {
+            System.out.println(temp);
+        }
+
+        // 데이터 정렬
+        list.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        System.out.println(list);
     }
 
     // 조회
