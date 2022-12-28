@@ -6,6 +6,9 @@ public class InstanceInnerMain {
         // 외부 클래스의 인스턴스를 생성
         InstanceInner instanceInner = new InstanceInner();
         // 내부 클래스의 인스턴스 생성
-        InstanceInner.Inner inner = instanceInner.new Inner();
+        //InstanceInner.Inner inner = instanceInner.new Inner();
+
+        // static Inner Class의 인스턴스 생성
+        InstanceInner.Inner obj = new InstanceInner.Inner();
     }
 }
