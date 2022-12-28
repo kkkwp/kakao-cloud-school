@@ -10,15 +10,17 @@ class ShareData implements Runnable {
     }
 
     // idx의 값을 1씩 증가시키면서 result에 더해줄 메서드
-
-    // 동기화 시키기(lock 만들기) - 공유도가 떨어져서 비추
-    private synchronized void sum() {
+    // tranaction으로 묶기 - 한번에 수행될 영역만 묶어주기
+    private void sum() {
         for (int i = 0; i < 1000; i++) {
-            idx += 1;
-            try {
-                Thread.sleep(1);
-            } catch (Exception e) { }
-            result += idx;
+            // 이 영역 내에서는 다른 작업이 this를 사용할 수 없음
+            synchronized (this) {
+                idx += 1;
+                try {
+                    Thread.sleep(1);
+                } catch (Exception e) {}
+                result += idx;
+            }
         }
     }
 
@@ -38,7 +40,7 @@ public class MutexMain {
         th2.start();
         try {
             Thread.sleep(5000);
-            System.out.println(data.getResult()); // 2001000
+            System.out.println(data.getResult());
         } catch (Exception e) {}
     }
 }
