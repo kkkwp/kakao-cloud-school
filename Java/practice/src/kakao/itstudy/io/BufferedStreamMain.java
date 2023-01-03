@@ -4,7 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 public class BufferedStreamMain {
 
@@ -21,18 +20,18 @@ public class BufferedStreamMain {
             java.lang.System.out.println(e.getLocalizedMessage());
         }
 
+        // 나누어서 읽기 - 웹에서 파일 다운로드 받을 때 사용
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("./buffer.txt"))) {
-            while (true) {
-                // 파일에서 읽을 수 있는 크기로 바이트 배열을 생성
-                byte[] b = new byte[bis.available()];
-                // 읽기
-                int len = bis.read(b);
-                // 읽은 게 없으면 종료
-                if (len <= 0) 
+            while(true) {
+                // 16바이트 단위로 읽어오기
+                // 일반적으로 128의 배수를 많이 이용
+                byte [] b = new byte[1024];
+                int len = bis.read(b, 0, b.length);
+                if(len <= 0)
                     break;
-                System.out.println(Arrays.toString(b));
-                // 문자열로 변환
-                System.out.println(new String(b));
+                // 받을 내용을 가지고 작업
+                // 다운로드라면 파일에 기록하고, 문자열이라면 하나로 모아서 읽어야 함
+                System.out.println((new String(b)).trim());
             }
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
